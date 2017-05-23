@@ -1,0 +1,6 @@
+GET    /greet              counter.CounterCtl.greet
+GET    /                   counter.CounterCtl.index
+POST   /inc                counter.CounterCtl.increment
+POST   /service/*path      counter.CounterCtl.service(path)
+
+GET    /asset/*file        controllers.Assets.versioned(path = "/public", file: Asset)

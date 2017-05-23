@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <option name="incrementalityType" value="SBT" />
+    <profile name="SBT 1" modules="sportbuddy,sharedJVM" />
+    <profile name="SBT 2" modules="client">
+      <parameters>
+        <parameter value="-P:scalajs:mapSourceURI:file:/Users/damienrochat/Cours/Bachelor/Scala/Projet/sportbuddy/client/src/main/scala/-&gt;78f9d4744c38b9dbd3a7/" />
+      </parameters>
+      <plugins>
+        <plugin path="$USER_HOME$/.ivy2/cache/org.scala-js/scalajs-compiler_2.11.8/jars/scalajs-compiler_2.11.8-0.6.16.jar" />
+      </plugins>
+    </profile>
+    <profile name="SBT 3" modules="server">
+      <option name="deprecationWarnings" value="true" />
+      <option name="uncheckedWarnings" value="true" />
+      <parameters>
+        <parameter value="-encoding" />
+        <parameter value="utf8" />
+      </parameters>
+    </profile>
+    <profile name="SBT 4" modules="sharedJS,standaloneClient">
+      <plugins>
+        <plugin path="$USER_HOME$/.ivy2/cache/org.scala-js/scalajs-compiler_2.11.8/jars/scalajs-compiler_2.11.8-0.6.16.jar" />
+      </plugins>
+    </profile>
+  </component>
+</project>
