@@ -15,7 +15,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sportbuddy.iml" filepath="$PROJECT_DIR$/.idea/modules/sportbuddy.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/standaloneClient.iml" filepath="$PROJECT_DIR$/.idea/modules/standaloneClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/standaloneClient-build.iml" filepath="$PROJECT_DIR$/.idea/modules/standaloneClient-build.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/standaloneClient-standaloneClient-build.iml" filepath="$PROJECT_DIR$/.idea/modules/standaloneClient-standaloneClient-build.iml" />
     </modules>
   </component>
 </project>
