@@ -13,6 +13,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sharedJVM.iml" filepath="$PROJECT_DIR$/.idea/modules/sharedJVM.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sharedJVM-build.iml" filepath="$PROJECT_DIR$/.idea/modules/sharedJVM-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sportbuddy.iml" filepath="$PROJECT_DIR$/.idea/modules/sportbuddy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sportbuddy-build.iml" filepath="$PROJECT_DIR$/.idea/modules/sportbuddy-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sportbuddy-sources.iml" filepath="$PROJECT_DIR$/.idea/modules/sportbuddy-sources.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/standaloneClient.iml" filepath="$PROJECT_DIR$/.idea/modules/standaloneClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/standaloneClient-build.iml" filepath="$PROJECT_DIR$/.idea/modules/standaloneClient-build.iml" />
     </modules>

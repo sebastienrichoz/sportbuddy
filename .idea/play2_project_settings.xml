@@ -13,6 +13,7 @@
         <entry key="server">
           <value>
             <ProjectSettingsEntry>
+              <option name="sourceDir" value="$PROJECT_DIR$/server/app" />
               <option name="confDir" value="$PROJECT_DIR$/server/app" />
               <option name="templateImports">
                 <list>
@@ -31,6 +32,13 @@
                 </list>
               </option>
               <option name="uri" value="$PROJECT_DIR$/server" />
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
+        <entry key="sportbuddy">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="playDistrPath" value="$USER_HOME$/.ivy2/cache/com.typesafe.play/play_2.11/jars/play_2.11-2.5.14.jar" />
             </ProjectSettingsEntry>
           </value>
         </entry>

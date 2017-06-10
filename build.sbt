@@ -1,4 +1,4 @@
-name := "counter"
+name := "sportbuddy"
 
 scalaVersion in ThisBuild := "2.11.8"
 
@@ -35,9 +35,14 @@ val server =
       scalaJSProjects := Seq(client),
       pipelineStages in Assets := Seq(scalaJSPipeline),
       libraryDependencies ++= Seq(
-        "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
+        "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
+        "mysql" % "mysql-connector-java" % "5.1.38",
+        "com.typesafe.play" %% "play-slick" % "2.0.0",
+        "com.typesafe.play" %% "play-slick-evolutions" % "2.0.0"
       )
-    )
+
+)
+
 
 val standaloneClient =
   project

@@ -5,13 +5,14 @@
     <profile name="SBT 1" modules="sportbuddy,sharedJVM" />
     <profile name="SBT 2" modules="client">
       <parameters>
-        <parameter value="-P:scalajs:mapSourceURI:file:/Users/damienrochat/Cours/Bachelor/Scala/Projet/sportbuddy/client/src/main/scala/-&gt;78f9d4744c38b9dbd3a7/" />
+        <parameter value="-P:scalajs:mapSourceURI:file:/Users/sebastien/Documents/HEIG-VD/SEM6/SCALA/Projet/sportbuddy/client/src/main/scala/-&gt;7e5dbf0e6c51b6af9baa/" />
       </parameters>
       <plugins>
         <plugin path="$USER_HOME$/.ivy2/cache/org.scala-js/scalajs-compiler_2.11.8/jars/scalajs-compiler_2.11.8-0.6.16.jar" />
       </plugins>
     </profile>
     <profile name="SBT 3" modules="server">
+      <option name="postfixOps" value="true" />
       <option name="deprecationWarnings" value="true" />
       <option name="uncheckedWarnings" value="true" />
       <parameters>
