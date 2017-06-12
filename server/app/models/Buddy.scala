@@ -1,12 +1,12 @@
 package models
 
-import java.sql.Date
+import java.util.Date
 
 import play.api.Play
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
-
+import sharedmodels.BuddyDTO
 import slick.driver.JdbcProfile
 import slick.driver.MySQLDriver.api._
 import slick.jdbc.GetResult
@@ -47,9 +47,9 @@ object Buddies {
 
 
   implicit val getBuddyDTOResult = GetResult(r => BuddyDTO(r.nextInt, r.nextString, r.nextString,
-    r.nextString, r.nextString, r.nextDate(), r.nextString, r.nextString, r.nextString))
+    r.nextString, r.nextString, r.nextString(), r.nextString, r.nextString, r.nextString))
 
-  def getBuddies(activity: String, level: String, city: String): Future[Vector[BuddyDTO]] =  {
+  def getBuddies(activity: String, level: String, city: String): Future[Seq[BuddyDTO]] =  {
 
     val people = TableQuery[PersonTableDef]
     val activities = TableQuery[ActivityTableDef]
@@ -81,11 +81,11 @@ object Buddies {
 
     Await.ready(f, 5 seconds)
 
-    f andThen {
-      case Success(b) => b :: fullbuddies
-    } andThen {
-      case _ => fullbuddies
-    }
+//    f andThen {
+//      case Success(b) => b :: fullbuddies
+//    } andThen {
+//      case _ => fullbuddies
+//    }
   }
 
   def listAll: Future[Seq[Buddy]] = {
@@ -97,24 +97,13 @@ object Buddies {
   }
 
 }
-
-case class BuddyDTO(id: Int, firstname: String, lastname: String, description: String, email: String, birthdate: Date, activity: String, level: String, city: String)
-
-object BuddyDTO {
-  // case class BuddyDTO(id: Int, firstname: String, lastname: String, description: String, email: String, birthdate: Date, activity: String, level: String, city: String)
-  implicit val buddyDTOWrites: Writes[BuddyDTO] = (
-    (JsPath \ "id").write[Int] and
-      (JsPath \ "firstname").write[String] and
-      (JsPath \ "lastname").write[String] and
-      (JsPath \ "description").write[String] and
-      (JsPath \ "email").write[String] and
-      (JsPath \ "birthdate").write[Date] and
-      (JsPath \ "activity").write[String] and
-      (JsPath \ "level").write[String] and
-      (JsPath \ "city").write[String]
-    )(unlift(BuddyDTO.unapply))
-}
-
-object Formatters {
-  implicit val BuddyDTOFormat: OFormat[BuddyDTO] = Json.format[BuddyDTO]
-}
+//
+//object BuddyDTO {
+//  def apply(nextInt: Int, nextString: String, nextString1: String, nextString2: String, nextString3: String, date: Date, nextString4: String, nextString5: String, nextString6: String): BuddyDTO = {
+//    new BuddyDTO(nextInt, nextString, nextString1, nextString2, nextString3, date, nextString4, nextString5, nextString6)
+//  }
+//}
+//
+//object Formatters {
+//  implicit val BuddyDTOFormat: OFormat[BuddyDTO] = Json.format[BuddyDTO]
+//}

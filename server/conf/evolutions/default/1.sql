@@ -38,9 +38,9 @@ CREATE TABLE buddy (
 
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (1, 'Damien', 'Rochat', 'Pour un peu de sport et beaucoup de bière', 'damienrochat@gmail.com', '1991-11-23' );
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (2, 'Kevin', 'Ponce', 'Rien de mieux que de courir après un ballon', 'kevinponce@gmail.com', '1991-07-12' );
-INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (3, 'Rosanne', 'Combremont', 'j\'aime être invitée aux mariages mais j\'attends toujours le mien...', 'rossane@gmail.com', '1992-08-23' );
+INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (3, 'Rosanne', 'Combremont', 'Le ski c\'est la vie', 'rossane@gmail.com', '1992-08-23' );
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (4, 'Patrick', 'Djomo', 'Viens boxer dans la rue mec', 'patrickdjomo@gmail.com', '1997-03-12' );
-INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (5, 'Christopher', 'Browne', 'Cherche partenaire pour grimper tout nu en extérieur', 'chrisbrown@gmail.com', '1993-05-23' );
+INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (5, 'Christopher', 'Browne', 'Cherche partenaire pour grimper en extérieur', 'chrisbrown@gmail.com', '1993-05-23' );
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (6, 'Adriano', 'Ruberto', 'Allez viens faire quelques brasses, on sera bien', 'ruberto@gmail.com', '1995-09-03' );
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (7, 'Sébastien', 'Richoz', 'Y\'en a marre de bosser', 'sebrichoz@gmail.com', '1991-10-31' );
 
@@ -56,7 +56,7 @@ INSERT INTO activity(id, name) VALUES (9, 'Natation');
 INSERT INTO activity(id, name) VALUES (10, 'Squash');
 
 INSERT INTO level(id, name) VALUES (1, 'Débutant');
-INSERT INTO level(id, name) VALUES (2, 'Intermédiare');
+INSERT INTO level(id, name) VALUES (2, 'Intermédiaire');
 INSERT INTO level(id, name) VALUES (3, 'Avancé');
 
 INSERT INTO location(id, city) VALUES (1, 'Yverdon');

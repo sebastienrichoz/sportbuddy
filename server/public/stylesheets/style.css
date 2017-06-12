@@ -2987,7 +2987,7 @@ ul.common li a:hover {
 .comment-center .mail-contnet .time {
     display: inline-block;
     font-size: 12px;
-    color: #98a6ad
+    color: #c55729
 }
 
 .sales-report {
@@ -10329,44 +10329,6 @@ a.mytooltip {
     transform: rotate3d(1, 1, 1, 0)
 }
 
-.tooltip-content2::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin: -7px 0 0 -15px;
-    width: 30px;
-    height: 20px;
-    background: url(../../plugins/images/tooltip/tooltip1.svg) center center no-repeat;
-    background-size: 100%
-}
-
-.tooltip-content3 {
-    position: absolute;
-    background: url(../../plugins/images/tooltip/shape1.svg) center bottom no-repeat;
-    background-size: 100% 100%;
-    z-index: 9999;
-    width: 200px;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -100px;
-    padding: 50px 30px;
-    text-align: center;
-    color: #fff;
-    opacity: 0;
-    cursor: default;
-    font-size: 14;
-    line-height: 27px;
-    pointer-events: none;
-    -webkit-transform: scale3d(.1, .2, 1);
-    transform: scale3d(.1, .2, 1);
-    -webkit-transform-origin: 50% 120%;
-    transform-origin: 50% 120%;
-    -webkit-transition: opacity .4s, -webkit-transform .4s;
-    transition: opacity .4s, transform .4s;
-    -webkit-transition-timing-function: ease, cubic-bezier(.6, 0, .4, 1);
-    transition-timing-function: ease, cubic-bezier(.6, 0, .4, 1)
-}
 
 .mytooltip:hover .tooltip-content3 {
     opacity: 1;

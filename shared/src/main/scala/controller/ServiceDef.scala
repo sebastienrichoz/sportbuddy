@@ -1,22 +1,16 @@
 package controller
 
+import sharedmodels.{Activity, BuddyDTO, Level, Location}
 
 trait ServiceDef {
 
-  def get(): Int
+  def brand() = "SportBuddy"
 
-  def increment(step: Int): Int
+  def getActivities(): Seq[Activity]
 
-  def reset(): Int
+  def getLevels(): Seq[Level]
 
-  def addBuddy(personId: Int, activityId: Int, levelId: Int, locationId: Int): Int
+  def getLocations(): Seq[Location]
 
-  def getActivities(): String
-
-  def getLevels(): String
-
-  def getLocations(): String
-
-  //def getBuddies(activityId: Int = null, levelId: Int = null, locationId: Int = null): String
-  def getBuddies(activity: String, level: String, city: String): String
+  def getBuddies(activity: String, level: String, city: String): Seq[BuddyDTO]
 }
