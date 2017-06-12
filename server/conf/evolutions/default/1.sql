@@ -42,7 +42,7 @@ INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUE
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (3, 'Rosanne', 'Combremont', 'Le ski c\'est la vie', 'rossane@gmail.com', '1992-08-23' );
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (4, 'Patrick', 'Djomo', 'Viens boxer dans la rue mec', 'patrickdjomo@gmail.com', '1997-03-12' );
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (5, 'Christopher', 'Browne', 'Cherche partenaire pour grimper en extérieur', 'chrisbrown@gmail.com', '1993-05-23' );
-INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (6, 'Adriano', 'Ruberto', 'Allez viens faire quelques brasses, on sera bien', 'ruberto@gmail.com', '1995-09-03' );
+INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (6, 'Sathiya', 'Kirushna', 'Allez viens faire quelques brasses, on sera bien', 'sat@gmail.com', '1995-09-03' );
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (7, 'Sébastien', 'Richoz', 'Y\'en a marre de bosser', 'sebrichoz@gmail.com', '1991-10-31' );
 
 INSERT INTO activity(id, name) VALUES (1, 'VTT');

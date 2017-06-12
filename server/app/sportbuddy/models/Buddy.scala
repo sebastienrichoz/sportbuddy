@@ -1,9 +1,9 @@
-package models
+package sportbuddy.models
 
 
 import play.api.Play
 import play.api.db.slick.DatabaseConfigProvider
-import sharedmodels.BuddyDTO
+import play.api.libs.json.{JsValue, Json, Writes}
 import slick.driver.JdbcProfile
 import slick.driver.MySQLDriver.api._
 import slick.jdbc.GetResult
@@ -12,8 +12,7 @@ import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
-
-case class Buddy(personId: Int, activityId: Int, levelId: Int, locationId: Int)
+case class Buddy (id: Int, personId: Int, activityId: Int, locationId: Int, levelId: Int)
 
 class BuddyTableDef (tag: Tag) extends Table[Buddy](tag, "buddy") {
 
@@ -23,7 +22,7 @@ class BuddyTableDef (tag: Tag) extends Table[Buddy](tag, "buddy") {
   def locationId = column[Int]("location_id")
   def levelId = column[Int]("level_id")
 
-  override def * = (personId, activityId, locationId, levelId) <> (Buddy.tupled, Buddy.unapply)
+  override def * = (id, personId, activityId, locationId, levelId) <> (Buddy.tupled, Buddy.unapply)
 
   def buddyFk = foreignKey("fk_person", personId, TableQuery[PersonTableDef])(p =>
     p.id/*, onUpdate = ForeignKeyAction.Cascade, onDelete = ForeignKeyAction.Cascade*/)
@@ -41,41 +40,38 @@ object Buddies {
 
   val buddies = TableQuery[BuddyTableDef]
 
+    implicit val getBuddyAPIResult = GetResult(r => BuddyAPI(r.nextInt, r.nextString, r.nextString,
+      r.nextString, r.nextString, r.nextString(), r.nextString(), r.nextString(), r.nextString()))
 
-  implicit val getBuddyDTOResult = GetResult(r => BuddyDTO(r.nextInt, r.nextString, r.nextString,
-    r.nextString, r.nextString, r.nextString(), r.nextString, r.nextString, r.nextString))
-
-  def getBuddies(activity: String, level: String, city: String): Future[Seq[BuddyDTO]] =  {
+  def getBuddies(activity: String, level: String, city: String): Future[Seq[BuddyAPI]] =  {
 
     val people = TableQuery[PersonTableDef]
     val activities = TableQuery[ActivityTableDef]
     val levels = TableQuery[LevelTableDef]
     val locations = TableQuery[LocationTableDef]
 
-    // TODO : attempts to write sql query without sql
-//    val query = for {
-//      ((((b, p), a), lvl), loc) <- buddies join people on (_.personId === _.id) join activities on (_._1.activityId === _.id) join levels on (_._1._1.levelId === _.id) join locations on (_._1._1._1.locationId === _.id)
-//    } yield (p.id, p.firstname, p.lastname, p.description, p.email, p.birthdate, a.name, lvl.name, loc.city)
 
-//    val query = for {
-//      b <- buddies
-//      p <- people if b.personId === p.id
-//      a <- activities if b.activityId === a.id
-//      lvl <- levels if b.levelId === lvl.id
-//      loc <- locations if b.locationId === loc.id
-//    } yield (p.id, p.firstname, p.lastname, p.description, p.email, p.birthdate, a.name, lvl.name, loc.city)
+    // TODO : attempts to write sql query without sql
+    //    val query = for {
+    //      ((((b, p), a), lvl), loc) <- buddies join people on (_.personId === _.id) join activities on (_._1.activityId === _.id) join levels on (_._1._1.levelId === _.id) join locations on (_._1._1._1.locationId === _.id)
+    //    } yield (p.id, p.firstname, p.lastname, p.description, p.email, p.birthdate, a.name, lvl.name, loc.city)
+
+    //    val query = for {
+    //      b <- buddies
+    //      p <- people if b.personId === p.id
+    //      a <- activities if b.activityId === a.id
+    //      lvl <- levels if b.levelId === lvl.id
+    //      loc <- locations if b.locationId === loc.id
+    //    } yield (p.id, p.firstname, p.lastname, p.description, p.email, p.birthdate, a.name, lvl.name, loc.city)
 
     // Good working "old school" way
     val query = sql"""SELECT person.id, firstname, lastname, buddy.description, email, birthdate, activity.name, level.name, location.city FROM buddy
                         INNER JOIN person ON buddy.person_id = person.id
                         INNER JOIN location ON buddy.location_id = location.id
                         INNER JOIN level ON buddy.level_id = level.id
-                        INNER JOIN activity ON buddy.activity_id = activity.id""".as[BuddyDTO]
+                        INNER JOIN activity ON buddy.activity_id = activity.id""".as[BuddyAPI]
 
-    val f = dbConfig.db.run(query)
-    var fullbuddies : List[BuddyDTO] = List()
-
-    Await.ready(f, 5 seconds)
+    dbConfig.db.run(query)
   }
 
   def listAll: Future[Seq[Buddy]] = {

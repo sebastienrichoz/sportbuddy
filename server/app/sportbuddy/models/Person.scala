@@ -1,6 +1,4 @@
-package models
-
-import java.sql.Date
+package sportbuddy.models
 
 import play.api.Play
 import play.api.db.slick.DatabaseConfigProvider
@@ -9,10 +7,7 @@ import slick.driver.MySQLDriver.api._
 
 import scala.concurrent.Future
 
-/**
-  * Created by sebastien on 06.06.17.
-  */
-case class Person(id: Int, firstname: String, lastname: String, description: String, email: String, birthdate: Date)
+case class Person(id: Int, firstname: String, lastname: String, description: String, email: String, birthdate: String)
 
 class PersonTableDef(tag: Tag) extends Table[Person](tag, "person") {
 
@@ -21,7 +16,7 @@ class PersonTableDef(tag: Tag) extends Table[Person](tag, "person") {
   def lastname = column[String]("lastname")
   def description = column[String]("description")
   def email = column[String]("email")
-  def birthdate = column[Date]("birthdate")
+  def birthdate = column[String]("birthdate")
 
   override def * =
     (id, firstname, lastname, description, email, birthdate) <>(Person.tupled, Person.unapply)

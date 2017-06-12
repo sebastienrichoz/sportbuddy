@@ -18,7 +18,14 @@ Librairies used in client, server and shared are explicitly defined in `build.sb
 
 ## Run
 
-This is a local project using a local MySQL database, you'll have to specify your database connection settings in `server/conf/evolutions/applicaion.conf`.
+This project need a database, you'll have to specify your connection settings in `server/conf/application.conf`.
+
+### Tip : MySQL with Docker
+
+Run a MySQL server: `docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=sportbuddy mysql:5`.
+
+You can connect to the server with MySQL client: `docker run -it mysql:5 mysql -h 127.0.0.1` (host depending your Docker configuration).
+
 
 ### with Intellij (2017.1.4)
 Clone this repo, open it with the IDE and execute the `server/run` config. Then browse at `localhost:9000`.

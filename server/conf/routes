@@ -1,9 +1,5 @@
-GET    /                   controller.ApplicationCtl.index
-GET    /buddies            controller.ApplicationCtl.getBuddies(activity: String, level: String, city: String)
-GET    /activities         controller.ApplicationCtl.getActivities
-GET    /levels             controller.ApplicationCtl.getLevels
-GET    /locations          controller.ApplicationCtl.getLocations
+GET    /                   sportbuddy.controllers.ApplicationCtl.index
 
-POST   /service/*path      controller.ApplicationCtl.service(path)
+POST   /service/*path      sportbuddy.controllers.ApplicationCtl.service(path)
 
 GET    /assets/*file       controllers.Assets.at(path = "/public", file)

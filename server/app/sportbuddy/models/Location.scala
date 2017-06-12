@@ -1,19 +1,16 @@
-package models
-
+package sportbuddy.models
 
 import play.api.Play
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.libs.functional.syntax._
 import play.api.libs.json.{JsPath, Writes}
-import sharedmodels.Location
+import sportbuddy.models.Location
 import slick.driver.JdbcProfile
 import slick.driver.MySQLDriver.api._
 
 import scala.concurrent.Future
 
-/**
-  * Created by sebastien on 06.06.17.
-  */
+case class Location(id: Int, name: String)
 
 class LocationTableDef(tag: Tag) extends Table[Location](tag, "location") {
 
