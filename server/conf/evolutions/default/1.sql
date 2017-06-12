@@ -26,6 +26,7 @@ CREATE TABLE location (
 
 CREATE TABLE buddy (
   id INT PRIMARY KEY AUTO_INCREMENT,
+  description TEXT,
   person_id INT NOT NULL,
   activity_id INT NOT NULL,
   level_id INT NOT NULL,
@@ -36,7 +37,7 @@ CREATE TABLE buddy (
   FOREIGN KEY (location_id) REFERENCES location(id)
 );
 
-INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (1, 'Damien', 'Rochat', 'Pour un peu de sport et beaucoup de bière', 'damienrochat@gmail.com', '1991-11-23' );
+INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (1, 'Damien', 'Rochat', '', 'damienrochat@gmail.com', '1991-11-23' );
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (2, 'Kevin', 'Ponce', 'Rien de mieux que de courir après un ballon', 'kevinponce@gmail.com', '1991-07-12' );
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (3, 'Rosanne', 'Combremont', 'Le ski c\'est la vie', 'rossane@gmail.com', '1992-08-23' );
 INSERT INTO person(id, firstname, lastname, description, email, birthdate) VALUES (4, 'Patrick', 'Djomo', 'Viens boxer dans la rue mec', 'patrickdjomo@gmail.com', '1997-03-12' );
@@ -68,18 +69,18 @@ INSERT INTO location(id, city) VALUES (6, 'Yvonand');
 INSERT INTO location(id, city) VALUES (7, 'Métabief');
 INSERT INTO location(id, city) VALUES (8, 'Morzine');
 
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (1, 1, 3, 3);
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (1, 8, 2, 1);
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (2, 3, 3, 5);
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (2, 8, 2, 5);
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (3, 4, 2, 2);
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (4, 5, 3, 1);
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (4, 5, 3, 5);
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (5, 6, 3, 3);
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (5, 6, 3, 8);
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (6, 9, 1, 1);
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (7, 2, 3, 1);
-INSERT INTO buddy(person_id, activity_id, level_id, location_id) VALUES (7, 4, 3, 2);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('Pour un peu de sport et beaucoup de bière', 1, 1, 3, 3);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('Dispo en soirées', 1, 8, 2, 1);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('De préférence le weekend', 2, 3, 3, 5);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('Je peux me déplacer en voiture pour aller plus loin', 2, 8, 2, 5);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('Restaurant ou pic-nic à midi, ça m\'est égal!', 3, 4, 2, 2);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('Viens boxer dans la rue mec', 4, 5, 3, 1);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('Viens boxer dans la rue mec', 4, 5, 3, 5);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('S\'il pleut on peut aller faire du bloc', 5, 6, 3, 3);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('S\'il pleut on peut aller faire du bloc', 5, 6, 3, 8);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('Dispo le matin en semaine', 6, 9, 1, 1);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('Pour du simple, du double ou du mixte', 7, 2, 3, 1);
+INSERT INTO buddy(description, person_id, activity_id, level_id, location_id) VALUES ('Dispo les weekends. Piste ou peau de phoque', 7, 4, 3, 2);
 
 # --- !Downs
 DROP TABLE buddy;

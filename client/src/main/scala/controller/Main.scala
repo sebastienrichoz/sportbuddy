@@ -168,7 +168,7 @@ object Main extends JSApp {
               <div class="mail-contnet">
                 <h5>{ b.firstname } { b.lastname }, { b.birthdate.toString }</h5><span class="time"><b>{ b.activity }</b> { b.level }  -  <i>{ b.city }</i></span>
                 <br/><span class="mail-desc">{ b.description }</span>
-                <a href={ "mailto:" + b.email } class="btn btn btn-rounded btn-default btn-outline m-r-5"><i class="ti-check text-success m-r-5"></i>Contact</a>
+                <span>{ b.email } <a href={ "mailto:" + b.email } class="btn btn btn-rounded btn-default btn-outline m-r-5"><i class="ti-check text-success m-r-5"></i>Contact</a></span>
               </div>
             </div>
           ))

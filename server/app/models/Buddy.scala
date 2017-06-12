@@ -1,11 +1,8 @@
 package models
 
-import java.util.Date
 
 import play.api.Play
 import play.api.db.slick.DatabaseConfigProvider
-import play.api.libs.json._
-import play.api.libs.functional.syntax._
 import sharedmodels.BuddyDTO
 import slick.driver.JdbcProfile
 import slick.driver.MySQLDriver.api._
@@ -14,7 +11,6 @@ import slick.jdbc.GetResult
 import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
-import scala.util.{Failure, Success}
 
 
 case class Buddy(personId: Int, activityId: Int, levelId: Int, locationId: Int)
@@ -69,8 +65,8 @@ object Buddies {
 //      loc <- locations if b.locationId === loc.id
 //    } yield (p.id, p.firstname, p.lastname, p.description, p.email, p.birthdate, a.name, lvl.name, loc.city)
 
-    // Good "old school" way is working compared to the attempts
-    val query = sql"""SELECT person.id, firstname, lastname, description, email, birthdate, activity.name, level.name, location.city FROM buddy
+    // Good working "old school" way
+    val query = sql"""SELECT person.id, firstname, lastname, buddy.description, email, birthdate, activity.name, level.name, location.city FROM buddy
                         INNER JOIN person ON buddy.person_id = person.id
                         INNER JOIN location ON buddy.location_id = location.id
                         INNER JOIN level ON buddy.level_id = level.id
@@ -80,12 +76,6 @@ object Buddies {
     var fullbuddies : List[BuddyDTO] = List()
 
     Await.ready(f, 5 seconds)
-
-//    f andThen {
-//      case Success(b) => b :: fullbuddies
-//    } andThen {
-//      case _ => fullbuddies
-//    }
   }
 
   def listAll: Future[Seq[Buddy]] = {
@@ -97,13 +87,3 @@ object Buddies {
   }
 
 }
-//
-//object BuddyDTO {
-//  def apply(nextInt: Int, nextString: String, nextString1: String, nextString2: String, nextString3: String, date: Date, nextString4: String, nextString5: String, nextString6: String): BuddyDTO = {
-//    new BuddyDTO(nextInt, nextString, nextString1, nextString2, nextString3, date, nextString4, nextString5, nextString6)
-//  }
-//}
-//
-//object Formatters {
-//  implicit val BuddyDTOFormat: OFormat[BuddyDTO] = Json.format[BuddyDTO]
-//}
