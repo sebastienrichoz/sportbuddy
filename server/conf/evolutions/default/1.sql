@@ -6,7 +6,7 @@ CREATE TABLE person (
   lastname VARCHAR(64) NOT NULL,
   description TEXT,
   email VARCHAR(128) NOT NULL,
-  birthdate DATE NOT NULL
+  birthdate VARCHAR(32) NOT NULL
 );
 
 CREATE TABLE activity (

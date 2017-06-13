@@ -5,7 +5,7 @@ import boopickle.Default._
 import mhtml.mount
 import org.scalajs.dom
 import org.scalajs.dom.Event
-import org.scalajs.dom.html.Select
+import org.scalajs.dom.html.{Input, Select}
 
 import scala.scalajs.js.{Date, JSApp}
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -52,7 +52,7 @@ object Main extends JSApp {
               <div class="comment-body">
                 <div class="user-img"> <img src="assets/images/avatar.png" alt="user" class="img-circle" /></div>
                 <div class="mail-contnet">
-                  <h5>{ b.firstname } { b.lastname }, { getAge(b.birthdate.toString) }</h5><span class="time"><b>{ b.activity }</b> { b.level }  -  <i>{ b.location }</i></span>
+                  <h5>{ b.firstname } { b.lastname }, { getAge(b.birthdate) }</h5><span class="time"><b>{ b.activity }</b> { b.level }  -  <i>{ b.location }</i></span>
                   <br/><span class="mail-desc">{ b.description }</span>
                   <span>{ b.email } <a href={ "mailto:" + b.email } class="btn btn btn-rounded btn-default btn-outline m-r-5"><i class="ti-check text-success m-r-5"></i>Contact</a></span>
                 </div>
@@ -97,6 +97,7 @@ object Main extends JSApp {
         }
 
         mount(dom.document.getElementById("activitySelector"), activities)
+        mount(dom.document.getElementById("addBuddyActivitySelector"), activities)
 
       case Failure(reason) =>
         println("Unable to retrieve the activities")
@@ -131,6 +132,7 @@ object Main extends JSApp {
         }
 
         mount(dom.document.getElementById("levelSelector"), levels)
+        mount(dom.document.getElementById("addBuddyLevelSelector"), levels)
 
       case Failure(reason) =>
         println("Unable to retrieve the levels")
@@ -165,6 +167,7 @@ object Main extends JSApp {
         }
 
         mount(dom.document.getElementById("citySelector"), cities)
+        mount(dom.document.getElementById("addBuddyCitySelector"), cities)
 
       case Failure(reason) =>
         println("Unable to retrieve the cities")
@@ -176,5 +179,54 @@ object Main extends JSApp {
       * Search for all buddies, without filter
       */
     searchBuddies()
+
+
+    /**
+      * Add buddy
+      */
+    val addBuddyButton = {
+
+      def onClick(event: Event) = {
+
+        val firstname = dom.document.getElementById("firstname").asInstanceOf[Input].value
+        val lastname = dom.document.getElementById("lastname").asInstanceOf[Input].value
+        val description = dom.document.getElementById("description").asInstanceOf[Input].value
+        val email = dom.document.getElementById("email").asInstanceOf[Input].value
+        val birthdate = dom.document.getElementById("birthdate").asInstanceOf[Input].value
+        val bdescription = dom.document.getElementById("bdescription").asInstanceOf[Input].value
+        val activity = dom.document.getElementById("addBuddyActivitySelector").asInstanceOf[Select].value
+        val level = dom.document.getElementById("addBuddyLevelSelector").asInstanceOf[Select].value
+        val city = dom.document.getElementById("addBuddyCitySelector").asInstanceOf[Select].value
+
+        println("addbuddy")
+        println(firstname)
+        println(lastname)
+        println(description)
+        println(email)
+        println(birthdate)
+        println(bdescription)
+        println(activity)
+        println(level)
+        println(city)
+
+        if (!firstname.isEmpty && !lastname.isEmpty && !description.isEmpty && !email.isEmpty && !birthdate.isEmpty && !bdescription.isEmpty&& !activity.isEmpty && !level.isEmpty && !city.isEmpty) {
+          client.addBuddy(firstname, lastname, description, email, birthdate, bdescription, activity, level, city).call().onComplete {
+            case Success(result) =>
+              dom.window.alert("New buddy !")
+              searchBuddies()
+
+            case Failure(reason) =>
+              dom.window.alert("Unexpected error :(")
+              reason.printStackTrace()
+          }
+        }
+        else {
+          dom.window.alert("All fields are required")
+        }
+      }
+
+      <button onclick={ onClick _} type="button" class="btn btn-success">Post</button>
+    }
+    mount(dom.document.getElementById("addBuddySubmit"), addBuddyButton)
   }
 }

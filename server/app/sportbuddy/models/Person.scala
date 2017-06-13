@@ -32,4 +32,8 @@ object People {
     dbConfig.db.run(people.result)
   }
 
+  def add(person: Person): Future[Int] = {
+    dbConfig.db.run((people returning people.map(_.id)) += person)
+  }
+
 }

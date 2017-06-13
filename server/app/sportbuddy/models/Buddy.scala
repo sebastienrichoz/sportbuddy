@@ -3,26 +3,24 @@ package sportbuddy.models
 
 import play.api.Play
 import play.api.db.slick.DatabaseConfigProvider
-import play.api.libs.json.{JsValue, Json, Writes}
 import slick.driver.JdbcProfile
 import slick.driver.MySQLDriver.api._
 import slick.jdbc.GetResult
 
-import scala.concurrent.{Await, Future}
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration._
+import scala.concurrent.Future
 
-case class Buddy (id: Int, personId: Int, activityId: Int, locationId: Int, levelId: Int)
+case class Buddy (id: Int, description: String, personId: Int, activityId: Int, locationId: Int, levelId: Int)
 
 class BuddyTableDef (tag: Tag) extends Table[Buddy](tag, "buddy") {
 
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
+  def description = column[String]("description")
   def personId = column[Int]("person_id")
   def activityId = column[Int]("activity_id")
   def locationId = column[Int]("location_id")
   def levelId = column[Int]("level_id")
 
-  override def * = (id, personId, activityId, locationId, levelId) <> (Buddy.tupled, Buddy.unapply)
+  override def * = (id, description, personId, activityId, locationId, levelId) <> (Buddy.tupled, Buddy.unapply)
 
   def buddyFk = foreignKey("fk_person", personId, TableQuery[PersonTableDef])(p =>
     p.id/*, onUpdate = ForeignKeyAction.Cascade, onDelete = ForeignKeyAction.Cascade*/)
