@@ -1,7 +1,8 @@
-# SportBuddy
+# Scala Project - Sportbuddy
 
-*Project still under development*
+*Heig-vd - 12.06.17*
 
+Repo: https://github.com/sebastienrichoz/sportbuddy (*still under development*)
 
 This project is a simple web application letting you find sport partners by specifying the activity, level and city you target.
 
