@@ -1,12 +1,14 @@
 # Scala Project - Sportbuddy
 
-*Heig-vd - 12.06.17*
+*School project in HEIG-VD - 12.06.17*
 
-Repo: https://github.com/sebastienrichoz/sportbuddy (*still under development*)
-
-This project is a simple web application letting you find sport partners by specifying the activity, level and city you target.
+This project is a basic web application using developped with Scala Play, ScalaJS, and Slick letting you find sport partners by specifying the activity, level and city you wish. You also can add a buddy with the dedicated form on the right of the underlying screenshot of the app.
 
 ![Architecture](doc/screen.png)
+
+The list of buddies refreshes automatically after choosing one of the filters present in the header bar.
+
+To keep it simple, there is no logging nor account creation as they would be in such applications. The user is free to create any buddies and is limited in the choice of activities, levels and cities by the data present in database. The purpose is to use get and post requests.
 
 ## Technologies
 
@@ -123,6 +125,10 @@ Then requests to get all buddies, activities, levels, and cities are executed to
 Finally, the user searchs for buddies by choosing an appropriate activity, level, and/or city. These actions result in as many GET requests as the search button is clicked.
 
 ![UML](doc/requests.png)
+
+### Problems encountered and how we solved them
+
+One problem we had was to make an sql mutliple inner join query with slick. We attempted to do it in two different manners (as you can see in `server/app/sportbuddy/models/Buddy.scala`) but we finally choosed the old school way, i.e. writing it with plain sql.
 
 ### Authors
 [Sébastien Richoz](mailto:sebastien.richoz1@heig-vd.ch), [Damien Rochat](mailto:damien.rochat@heig-vd.ch)
