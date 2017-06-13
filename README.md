@@ -27,7 +27,6 @@ Run a MySQL server: `docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQ
 
 You can connect to the server with MySQL client: `docker run -it mysql:5 mysql -h 127.0.0.1` (host depending your Docker configuration).
 
-
 ### with Intellij (2017.1.4)
 Clone this repo, open it with the IDE and execute the `server/run` config. Then browse at `localhost:9000`.
 
@@ -42,7 +41,26 @@ In addition to usual architectures, there is a `shared` folder containing an abs
 
 ![Architecture](doc/architecture.png)
 
-### Database modelling
+### Communication
+
+All communications between the client and the server use Autowire, a library that allow to simply call method on services from client to server instead of making XHR requests.
+
+Our main service contains 5 methods :
+- `getActivities()` returning all available activities
+- `getLevels()` returning all available levels
+- `getLocations()` returning all available locations
+- `getBuddies(activity: String, level: String, location: String)` returning buddies (with optional filters)
+- `addBuddy(...)` allowing to add a new person and directly a new buddy attached to it
+
+In fact, there is a POST XHR request, handled by Autowire that.
+It will call the right server method.
+
+The application needs only two routes :
+- The main route allowing to load the html page
+- A `services` route that will be used by Autowire for communications
+
+### Database
+
 Data are stored in a MySQL Database. The database is created and populated - if not already existing - by the *Scala Play database evolutions* plugin when the server launches.
 
 The `server/conf/evolutions/default/1.sql` contains the table creation and database population script. This file is automatically called by the plugin. Note that the package and file notation must match this specific syntax. For other scripts, we would have had a `2.sql`, `3.sql`, ... and for other databases `evolutions/anotherdbname/...`. These can be configured in `server/conf/evolutions/applicaion.conf`
@@ -62,58 +80,12 @@ class LocationTableDef(tag: Tag) extends Table[Location](tag, "location") {
 }
 ```
 
-### REST API
-Endpoints:
-- Get views and assets
-    - **URL**  /
-    - **Method** GET
-    - **URL Params** None
-    - **Data Params** None
-    - **Success Response** 200 Ok
-        - **Content** views and assets
-    - **Error Response** 404 Not Found
-- Get activities
-    - **URL**  /activities
-    - **Method** GET
-    - **URL Params** None
-    - **Data Params** None
-    - **Success Response** 200 Ok
-        - **Content** [{"id": 1, "name": "Football"}]
-        - **Type** Application/json
-    - **Error Response** 404 Not Found
-- Get levels
-    - **URL**  /levels
-    - **Method** GET
-    - **URL Params** None
-    - **Data Params** None
-    - **Success Response** 200 Ok
-        - **Content** [{"id": 1, "name": "Beginner"}]
-        - **Type** Application/json
-    - **Error Response** 404 Not Found
-- Get locations
-    - **URL**  /locations
-    - **Method** GET
-    - **URL Params** None
-    - **Data Params** None
-    - **Success Response** 200 Ok
-        - **Content** [{"id": 1, "city": "Yverdon"}]
-        - **Type** Application/json
-    - **Error Response** 404 Not Found
-- Get buddies
-    - **URL**  /buddies
-    - **Method** GET
-    - **URL Params** activity(String), level(String), city(String)
-    - **Data Params** None
-    - **Success Response** 200 Ok
-        - **Content** [{"id": 1, "firstname": "John", "lastname": "Smith", "description": "Avaialable at noon", "email": "johnsmith@smith.com", "birthdate": "1990-12-18", "activity": "Football", "level": "Beginner", "city": "Yverdon"}]
-        - **Type** Application/json
-    - **Error Response** 404 Not Found
-
 ### Application lifecycle
+
 1. Server creation
 2. Database creation and seeding with evolutions
 3. Client first GET request to retrieve views and assets (in `server/public/`)
-4. Client GET request to retrieve all buddies, activities, levels, and cities
+4. Client GET request to retrieve all activities, levels, cities and buddies
 5. Client-Server communications depending of user interactions
 
 The first client request is to get the views (html) and all assets (fonts, images, css, js). This is mandatory to have the structure and visual aspect of the app.
@@ -121,8 +93,6 @@ The first client request is to get the views (html) and all assets (fonts, image
 Then requests to get all buddies, activities, levels, and cities are executed to display these data on the client side. We insert the html content built with ScalaJs in the DOM by getting the specific html tag id, which is defined on server side. This method results in a high coupling between client and server.
 
 Finally, the user searchs for buddies by choosing an appropriate activity, level, and/or city. These actions result in as many GET requests as the search button is clicked.
-
-![UML](doc/requests.png)
 
 ### Authors
 [Sébastien Richoz](mailto:sebastien.richoz1@heig-vd.ch), [Damien Rochat](mailto:damien.rochat@heig-vd.ch)
